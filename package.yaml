@@ -24,6 +24,9 @@ dependencies:
 
 library:
   source-dirs: src
+  dependencies:
+  - directory
+  - process
 
 executables:
   uhouse-hardware-ds18s20-exe:
