@@ -27,6 +27,7 @@ library:
   dependencies:
   - directory
   - process
+  - filepath
 
 executables:
   uhouse-hardware-ds18s20-exe:
@@ -37,6 +38,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - datetime    
     - uhouse-hardware-ds18s20
 
 tests:
