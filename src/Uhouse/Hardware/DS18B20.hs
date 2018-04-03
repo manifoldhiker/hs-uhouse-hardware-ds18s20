@@ -1,7 +1,7 @@
 module Uhouse.Hardware.DS18B20
     (     Temperature
 
-        ,  initModprobe
+        , initModprobe
         , getTemperatureFile
         , readTemp
     )
@@ -29,7 +29,7 @@ getTemperatureFile = pickTempFile <$> getDirectoryContents rootDeviceDir
         Just dn -> rootDeviceDir </> dn </> "w1_slave"
         Nothing -> error "No device found"
 
-newtype Temperature = RawTemperature { getRawTemp :: String } deriving (Show, Read)
+type Temperature = Double
 
 readTemp :: FilePath -> IO (Maybe Temperature)
 readTemp fp = mapTemp <$> readFile fp
@@ -38,4 +38,4 @@ mapTemp :: String -> Maybe Temperature
 mapTemp = fmap parseTemp . asum . fmap strip . words
   where
     strip = stripPrefix "t="
-    parseTemp = RawTemperature
+    parseTemp = (/1000) . read
